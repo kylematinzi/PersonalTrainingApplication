@@ -1,0 +1,68 @@
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Default Homepage</title>-->
+<!--</head>-->
+<!--<body style="background-color: green">-->
+
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Task List</title>
+  <style>
+    .completed { color: green; text-decoration: line-through; }
+    .pending { color: red; }
+    h1 {
+      color: purple;
+    }
+    h2{
+      color: cyan;
+    }
+    button {
+      background-color: darkgreen;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      display: inline-block;
+
+    }
+    .button-group{
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+    }
+    button:hover {
+      background-color: #e64a19;
+    }
+    form {
+      position: relative;
+      padding-top: 50px;
+    }
+  </style>
+</head>
+<body>
+<h1>My Tasks</h1>
+<ul>
+  <li th:each="task : ${tasks}"
+      th:class="${task.completed} ? 'completed' : 'pending'"
+      th:text="${task.name}"></li>
+</ul>
+<form th:action="@{/addTask}" method="post">
+  <label for="name">New Task:</label>
+  <input type="text" id="name" name="name" required/>
+  <div class = "button-group">
+    <button type="submit">Add Task</button>
+    <button onclick="window.location.href='/journal'">Go to Journal</button>
+    <button onclick="window.location.href='/journal'">Go to Somewhere</button>
+  </div>
+</form>
+</body>
+</html>

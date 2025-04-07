@@ -3,10 +3,12 @@ package com.personaltraining.personaltrainingapplication;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PersonalTrainingController {
+
+    @GetMapping("/")
+    public String homePage(){ return "defaultHomePage"; }
 
     @GetMapping("/journal")
     public String journal(){ return "journal"; }
@@ -22,6 +24,9 @@ public class PersonalTrainingController {
 
     @GetMapping("/aiGeneratedWorkoutPage")
     public String aiGeneratedWorkout(){ return "aiGeneratedWorkoutPage"; }
+
+    @GetMapping("/defaultHomepage")
+    public String defaultHomepage(){ return "defaultHomepage"; }
 
 
 }
