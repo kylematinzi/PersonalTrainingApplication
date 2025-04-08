@@ -10,8 +10,8 @@ public class PersonalTrainingController {
     @GetMapping("/")
     public String homePage(){ return "defaultHomePage"; }
 
-    @GetMapping("/journal")
-    public String journal(){ return "journal"; }
+//    @GetMapping("/journal")
+//    public String journal(){ return "journal"; }
 
     @GetMapping("/trainerHomePage")
     public String trainerHomePage(){ return "trainerHomePage"; }
