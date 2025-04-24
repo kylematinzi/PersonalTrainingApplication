@@ -13,12 +13,20 @@ public class WorkoutService {
     }
 
     public String generateWorkoutPlan(String userRequest) {
-        String systemPrompt = """
-            You are a professional fitness trainer. Generate a detailed workout routine based on the user's request.
-            Include exercises, sets, reps, and rest periods. Format the response clearly with sections for each day.
-            Ensure the plan is safe, practical, and tailored to the request.
-            """;
-        Prompt prompt = new Prompt(systemPrompt + "\nUser request: " + userRequest);
-        return chatModel.call(prompt).getResult().getOutput().getText();
+        try {
+            String systemPrompt = """
+                You are a professional fitness trainer. Generate a detailed workout routine based on the user's request.
+                Include exercises, sets, reps, and rest periods. Format the response clearly with sections for each day.
+                Ensure the plan is safe, practical, and tailored to the request.
+                """;
+            Prompt prompt = new Prompt(systemPrompt + "\nUser request: " + userRequest);
+            var response = chatModel.call(prompt);
+            if (response == null || response.getResult() == null || response.getResult().getOutput() == null) {
+                throw new RuntimeException("Invalid response from chat model");
+            }
+            return response.getResult().getOutput().getText();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to generate workout plan: " + e.getMessage(), e);
+        }
     }
 }
